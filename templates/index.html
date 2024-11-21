@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Cocktail Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', Arial, sans-serif;
+            background: url('/static/images/retroBar.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #FFD700; 
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8); 
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px; 
+            align-items: center;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav li:not(:last-child)::after {
+            content: '|'; 
+            position: absolute;
+            right: -20px;
+            color: #FFD700; 
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            color: #FFD700; 
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            color: #FF69B4; 
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            text-shadow: 3px 3px #000; 
+        }
+
+        .top-cocktails {
+            margin-top: 30px;
+        }
+
+        .cocktail-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cocktail {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            color: #FFD700;
+            text-align: left;
+        }
+
+        .btn {
+            background-color: #FF69B4; 
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FFD700; 
+            color: black;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('create_cocktail') }}">Make Your Cocktail</a></li>
+                    <li><a href="{{ url_for('cocktail_detail') }}">View Your Cocktails</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to Cocktail Lab</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+
+        <section class="top-cocktails">
+            <h2>Top 10 Famous Cocktails for Inspiration</h2>
+            <div class="cocktail-list">
+                <div class="cocktail">
+                    <h3>Margarita</h3>
+                    <p>Ingredients: Tequila, Lime Juice, Triple Sec, Salt</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Mojito</h3>
+                    <p>Ingredients: White Rum, Lime Juice, Mint, Soda Water, Sugar</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Old Fashioned</h3>
+                    <p>Ingredients: Whiskey, Bitters, Sugar, Orange Peel</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Piña Colada</h3>
+                    <p>Ingredients: Rum, Coconut Cream, Pineapple Juice</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Negroni</h3>
+                    <p>Ingredients: Gin, Campari, Sweet Vermouth</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Cosmopolitan</h3>
+                    <p>Ingredients: Vodka, Triple Sec, Cranberry Juice, Lime Juice</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Whiskey Sour</h3>
+                    <p>Ingredients: Whiskey, Lemon Juice, Sugar, Egg White</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Manhattan</h3>
+                    <p>Ingredients: Whiskey, Sweet Vermouth, Bitters</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Mai Tai</h3>
+                    <p>Ingredients: White Rum, Dark Rum, Lime Juice, Orange Liqueur, Orgeat Syrup</p>
+                </div>
+                <div class="cocktail">
+                    <h3>Bloody Mary</h3>
+                    <p>Ingredients: Vodka, Tomato Juice, Lemon Juice, Worcestershire Sauce, Spices</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
