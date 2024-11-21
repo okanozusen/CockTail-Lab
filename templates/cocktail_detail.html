@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Created Cocktails</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { 
+            font-family: 'Press Start 2P', cursive; 
+            background: url('static/images/RetroMiami.webp') no-repeat center center fixed; 
+            background-size: cover; 
+            color: white; 
+            padding: 20px; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+            color: #FFD700; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        nav {
+            display: flex; 
+            justify-content: center; 
+            gap: 50px; 
+            margin-bottom: 30px;
+            background-color: rgba(0, 0, 0, 0.6); 
+            padding: 10px; 
+            border-radius: 10px;
+        }
+
+        nav a {
+            text-decoration: none; 
+            color: #FFD700; 
+            font-size: 1.2rem; 
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #FFC107;
+        }
+
+        .main-content { 
+            display: flex; 
+            justify-content: center; 
+            width: 100%;
+        }
+
+        table {
+            width: 80%; 
+            border-collapse: collapse; 
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        th, td {
+            padding: 10px; 
+            text-align: center; 
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #444; 
+            color: #FFD700;
+        }
+
+        td {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .color-box {
+            width: 30px; 
+            height: 20px; 
+            display: inline-block; 
+            border: 1px solid #FFF;
+        }
+
+        .remove-btn {
+            margin: 5px; 
+            padding: 10px 15px; 
+            font-size: 14px; 
+            color: white; 
+            background-color: #FF5733; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #FF3B1A;
+        }
+
+        .make-more-btn {
+            margin-top: 20px; 
+            padding: 15px 30px; 
+            font-size: 1.2rem; 
+            background-color: #FFD700; 
+            color: black; 
+            border: none; 
+            border-radius: 10px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.3s;
+        }
+
+        .make-more-btn:hover {
+            background-color: #FFC107;
+        }
+
+        
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 8px; 
+                font-size: 14px;
+            }
+
+            .make-more-btn, .remove-btn {
+                width: 100%; 
+                font-size: 14px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('create_cocktail') }}">Make More Cocktails</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </nav>
+
+    <h1>Your Created Cocktails</h1>
+
+    <div class="main-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cocktail Name</th>
+                    <th>Cup</th>
+                    <th>Capacity</th>
+                    <th>Ingredients</th>
+                    <th>Color</th>
+                    <th>Attributes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if cocktails %}
+                    {% for cocktail in cocktails %}
+                    <tr id="cocktail-{{ cocktail.id }}">
+                        <td>{{ cocktail.name }}</td>
+                        <td>{{ cocktail.cup }}</td>
+                        <td>{{ cocktail.capacity }} oz</td>
+                        <td>
+                            {% for ingredient in cocktail.ingredients %}
+                                {{ ingredient.name }} - {{ ingredient.ounces }} oz{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <div class="color-box" style="background-color: {{ cocktail.color }}"></div>
+                            {{ cocktail.color }}
+                        </td>
+                        <td>
+                            Sweetness: {{ cocktail.sweetness }}<br>
+                            Bitterness: {{ cocktail.bitterness }}<br>
+                            Smoothness: {{ cocktail.smoothness }}<br>
+                            Strength: {{ cocktail.strength }}<br>
+                            Freshness: {{ cocktail.freshness }}<br>
+                            Enjoyment: {{ cocktail.enjoyment_rating }}<br>
+                            Final Strength: {{ cocktail.final_strength }}
+                        </td>
+                        <td>
+                            <button class="remove-btn" onclick="removeCocktail({{ cocktail.id }})">Remove</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">No cocktails found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('create_cocktail') }}" class="make-more-btn">Make More Cocktails</a>
+
+    <script>
+        function removeCocktail(cocktailId) {
+            fetch(`/delete_cocktail/${cocktailId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const row = document.getElementById(`cocktail-${cocktailId}`);
+                    if (row) row.remove();
+                } else {
+                    alert(data.error || "Failed to delete cocktail.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An unexpected error occurred. Please try again.");
+            });
+        }
+    </script>
+</body>
+</html>

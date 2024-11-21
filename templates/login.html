@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cocktail Lab</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', Arial, sans-serif; 
+            background: url('/static/images/retroBar.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #FFD700; 
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-shadow: 2px 2px #FF69B4, -2px -2px #00FFFF; 
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #00FFFF; 
+        }
+
+        label {
+            color: #FF69B4; 
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #FFD700; 
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #333;
+            color: #FFD700; 
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #FF69B4; 
+        }
+
+        button {
+            background-color: #FF69B4; 
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: #FFD700; 
+            color: black;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            color: #FFD700; 
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #FF69B4; 
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="container">
+        <h2>Login to Cocktail Lab</h2>
+        <p>Diving back in to make more? Let's get right to it! Shake, mix, and unleash your inner bartender to create legendary drinks. Your imagination is the only limit!</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            
+            <div>
+                <label for="username">{{ form.username.label }}</label>
+                {{ form.username(class="form-control") }}
+                {% for error in form.username.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label for="password">{{ form.password.label }}</label>
+                {{ form.password(class="form-control") }}
+                {% for error in form.password.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>
+
