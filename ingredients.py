@@ -1,0 +1,87 @@
+
+ingredient_ratings = {
+     "Alcohol": {
+        "Light rum": {"Bitterness": 2, "Smoothness": 7, "Strength": 4, "Color": "#D1E8E4"},
+        "Bourbon": {"Bitterness": 4, "Smoothness": 6, "Strength": 7, "Color": "#7A5C3C"},
+        "Vodka": {"Bitterness": 1, "Smoothness": 8, "Strength": 5, "Color": "#D1D1D1"},
+        "Gin": {"Bitterness": 3, "Smoothness": 7, "Strength": 6, "Color": "#D1E8E4"},
+        "Blended whiskey": {"Bitterness": 4, "Smoothness": 5, "Strength": 6, "Color": "#7A5C3C"},
+        "Tequila": {"Bitterness": 4, "Smoothness": 5, "Strength": 7, "Color": "#FFD700"},
+        "Sweet Vermouth": {"Bitterness": 3, "Smoothness": 6, "Strength": 5, "Color": "#9B1C1C"},
+        "Apricot brandy": {"Bitterness": 2, "Smoothness": 7, "Strength": 5, "Color": "#FFD700"},
+        "Triple sec": {"Bitterness": 2, "Smoothness": 6, "Strength": 4, "Color": "#E5D97E"},
+        "Southern Comfort": {"Bitterness": 3, "Smoothness": 6, "Strength": 5, "Color": "#7A5C3C"},
+        "Orange bitters": {"Bitterness": 7, "Smoothness": 4, "Strength": 3, "Color": "#FFA500"},
+        "Brandy": {"Bitterness": 3, "Smoothness": 7, "Strength": 6, "Color": "#7A5C3C"},
+        "Lemon vodka": {"Bitterness": 2, "Smoothness": 8, "Strength": 5, "Color": "#F1E5AC"},
+        "Dry Vermouth": {"Bitterness": 5, "Smoothness": 5, "Strength": 4, "Color": "#F1E5AC"},
+        "Dark rum": {"Bitterness": 5, "Smoothness": 6, "Strength": 7, "Color": "#3E1F1A"},
+        "Amaretto": {"Bitterness": 2, "Smoothness": 6, "Strength": 4, "Color": "#7A5C3C"},
+        "Tea": {"Bitterness": 2, "Smoothness": 8, "Strength": 3, "Color": "#6B4F34"},
+        "Applejack": {"Bitterness": 4, "Smoothness": 5, "Strength": 6, "Color": "#FFD700"},
+        "Champagne": {"Bitterness": 1, "Smoothness": 9, "Strength": 4, "Color": "#FFFAE3"},
+        "Scotch": {"Bitterness": 6, "Smoothness": 5, "Strength": 8, "Color": "#7A5C3C"},
+        "Coffee liqueur": {"Bitterness": 2, "Smoothness": 7, "Strength": 4, "Color": "#3E1F1A"},
+        "Añejo rum": {"Bitterness": 4, "Smoothness": 6, "Strength": 7, "Color": "#7A5C3C"},
+        "Bitters": {"Bitterness": 9, "Smoothness": 2, "Strength": 3, "Color": "#6B4F34"},
+        "Kahlua": {"Bitterness": 3, "Smoothness": 7, "Strength": 3, "Color": "#3E1F1A"},
+        "Dubonnet Rouge": {"Bitterness": 5, "Smoothness": 5, "Strength": 5, "Color": "#9B1C1C"},
+        "Irish whiskey": {"Bitterness": 4, "Smoothness": 6, "Strength": 7, "Color": "#7A5C3C"},
+        "Apple brandy": {"Bitterness": 3, "Smoothness": 6, "Strength": 5, "Color": "#FFD700"},
+        "Carbonated water": {"Bitterness": 1, "Smoothness": 9, "Strength": 1, "Color": "#D1D1D1"},
+        "Cherry brandy": {"Bitterness": 3, "Smoothness": 6, "Strength": 4, "Color": "#9B1C1C"},
+        "Creme de Cacao": {"Bitterness": 2, "Smoothness": 7, "Strength": 3, "Color": "#3E1F1A"},
+        "Port": {"Bitterness": 4, "Smoothness": 6, "Strength": 6, "Color": "#9B1C1C"},
+        "Coffee brandy": {"Bitterness": 3, "Smoothness": 5, "Strength": 4, "Color": "#6B4F34"},
+        "Red wine": {"Bitterness": 4, "Smoothness": 6, "Strength": 5, "Color": "#9B1C1C"},
+        "Rum": {"Bitterness": 4, "Smoothness": 5, "Strength": 6, "Color": "#F1E5AC"},
+        "Ricard": {"Bitterness": 8, "Smoothness": 3, "Strength": 6, "Color": "#E5D97E"},
+        "Sherry": {"Bitterness": 4, "Smoothness": 6, "Strength": 5, "Color": "#7A5C3C"},
+        "Cognac": {"Bitterness": 3, "Smoothness": 7, "Strength": 7, "Color": "#7A5C3C"},
+        "Sloe gin": {"Bitterness": 3, "Smoothness": 6, "Strength": 5, "Color": "#8B3B8C"},
+        "Strawberry schnapps": {"Bitterness": 2, "Smoothness": 7, "Strength": 3, "Color": "#FF0000"},
+        "Apple cider": {"Bitterness": 3, "Smoothness": 6, "Strength": 5, "Color": "#7A5C3C"}
+    },
+    "Non-Alcohol": {
+        "Lime juice": {"Sweetness": 2, "Freshness": 8, "Binds": 7, "Color": "#00FF00"},
+        "Lemon juice": {"Sweetness": 3, "Freshness": 7, "Binds": 6, "Color": "#FFFF00"},
+        "Cranberry juice": {"Sweetness": 3, "Freshness": 7, "Binds": 8, "Color": "#D32F2F"},
+        "Orange": {"Sweetness": 4, "Freshness": 6, "Binds": 5, "Color": "#FFA500"},
+        "Sugar": {"Sweetness": 10, "Freshness": 1, "Binds": 1, "Color": "#FFFFFF"},
+        "Milk": {"Sweetness": 3, "Freshness": 5, "Binds": 8, "Color": "#FFFFFF"},
+        "Lemonade": {"Sweetness": 7, "Freshness": 6, "Binds": 6, "Color": "#FFFF00"},
+        "Carbonated water": {"Sweetness": 1, "Freshness": 9, "Binds": 1, "Color": "#D1D1D1"},
+        "Grapefruit juice": {"Sweetness": 2, "Freshness": 7, "Binds": 5, "Color": "#FF6347"},
+        "Apple juice": {"Sweetness": 8, "Freshness": 6, "Binds": 5, "Color": "#FFEB3B"},
+        "Pineapple juice": {"Sweetness": 6, "Freshness": 7, "Binds": 5, "Color": "#FFEB3B"},
+        "Ginger": {"Sweetness": 2, "Freshness": 8, "Binds": 7, "Color": "#DDB67D"},
+        "Strawberries": {"Sweetness": 9, "Freshness": 8, "Binds": 6, "Color": "#FF0000"},
+        "Cantaloupe": {"Sweetness": 8, "Freshness": 9, "Binds": 7, "Color": "#FFA500"},
+        "Berries": {"Sweetness": 7, "Freshness": 8, "Binds": 6, "Color": "#8A2BE2"},
+        "Grapes": {"Sweetness": 8, "Freshness": 7, "Binds": 5, "Color": "#8B0000"},
+        "Coconut milk": {"Sweetness": 6, "Freshness": 4, "Binds": 7, "Color": "#FFFACD"},
+        "Papaya": {"Sweetness": 8, "Freshness": 9, "Binds": 7, "Color": "#FF6347"},
+        "Agave syrup": {"Sweetness": 9, "Freshness": 3, "Binds": 2, "Color": "#D3B09C"},
+        "Almond milk": {"Sweetness": 6, "Freshness": 5, "Binds": 7, "Color": "#FFF5F3"},
+        "Honey": {"Sweetness": 10, "Freshness": 2, "Binds": 2, "Color": "#FFB900"},
+        "Pomegranate": {"Sweetness": 6, "Freshness": 7, "Binds": 6, "Color": "#800000"},
+        "Mango": {"Sweetness": 9, "Freshness": 8, "Binds": 7, "Color": "#FFB300"},
+        "Blueberry": {"Sweetness": 7, "Freshness": 8, "Binds": 6, "Color": "#0000FF"},
+        "Blue Curacao (non-alcoholic)": {"Sweetness": 6, "Freshness": 5, "Binds": 7, "Color": "#1E90FF"},
+        "Blue Raspberry Syrup": {"Sweetness": 9, "Freshness": 4, "Binds": 3, "Color": "#00BFFF"},
+        "Butterfly Pea Flower": {"Sweetness": 3, "Freshness": 7, "Binds": 5, "Color": "#6A5ACD"},
+        "Ginger Ale": {"Sweetness": 5, "Freshness": 7, "Binds": 6, "Color": "#D1E8E2"},
+        "Mint Syrup": {"Sweetness": 6, "Freshness": 7, "Binds": 5, "Color": "#98FB98"},
+        "Pineapple": {"Sweetness": 7, "Freshness": 7, "Binds": 6, "Color": "#FFE135"},
+        "Cucumber": {"Sweetness": 3, "Freshness": 9, "Binds": 7, "Color": "#7FFFD4"},
+        "Kiwi": {"Sweetness": 6, "Freshness": 8, "Binds": 6, "Color": "#8FBC8F"}
+    }
+};
+
+def get_ingredient_rating(ingredient):
+    ingredient = ingredient.strip().lower()  
+    for category in ingredient_ratings:
+        for name in ingredient_ratings[category].keys():
+            if name.lower() == ingredient:  
+                return {**ingredient_ratings[category][name]}
+    return None  
