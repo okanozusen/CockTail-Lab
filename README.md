@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Capstone Project One
 
 We have broken down the Capstone Project into easy-to-follow steps. Each step of the capstone contains a link with instructions for that step. Here’s a quick overview of what you’ll do for each step of your capstone project:
@@ -54,3 +55,18 @@ project with a million moving parts you can get stuck in.
 3. The first two steps require mentor approval to proceed, but after that, you are free to continue working on the project after you submit your work. For instance, you don’t need your mentor to approve your database schema before you start working on your site. Likewise, you don’t need your mentor to approve the first iteration of your site before you start polishing it.
 4. If you get stuck, there is a wealth of resources at your disposal. The course contains all of the material you will need to complete this project, but a well-phrased Google search might yield you an immediate solution to your problem. Don’t forget that your Slack community, TAs, and your mentor there to help you out.
 5. Make sure you use a free API and deploy your project on Heroku , so everyone can see your work!
+=======
+# CockTail-Lab
+this is my first capstone project 
+Okan Ozusen
+Capstone proposal
+
+	For this project Cocktail lab and for the tech at this moment I would like to use Flask since I really like python and am more interested in it. The project will be full stack using a backend such  as SQL for the databases of the alcohols and mixers and the front end for when you mix the alcohol and it shows the final product color. The frontend will allow people to choose and pick what alcohol and how much do they want to put. I will also implement different cup sizes such  as a big jug for jungle juice or a regular cocktail cup. This will be a website that aims for people that love to drink, bartenders that are curious on making a drink but not having the drinks and worrying if it’s gonna taste good. The website will provide a selection of different types of alcohols and mixers that they make their own cocktails and show the colors. This will be good for people wanting to make a new drink, for example a Halloween themed drink that is green and tastes good and strong. The API I will use is either Cocktail DB or Open Mixology API because they offer a wide selection of spirits. Another implementation I will put is users so users can always look back into what they made and also a little social media input where users can post on the website their new alcoholic cocktail and share their thoughts on it with other people commenting on it. The SQL database that I will make is the cocktail people favorite because on the website I will have popular cocktails that people can use as inspiration, and the ones they make so it saves on server.
+>>>>>>> okanozusen/main
+<<<<<<< HEAD
+# Local version of README.md
+This is your local repository’s version.
+=======
+# Remote version of README.md
+This is the remote repository’s version.
+>>>>>>> okanozusen/main
