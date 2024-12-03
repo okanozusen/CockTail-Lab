@@ -14,7 +14,10 @@ from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'Ozusen18'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cocktails'
+uri = os.getenv('DATABASE_URL', 'postgresql:///cocktails')
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
