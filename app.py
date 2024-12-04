@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
@@ -11,11 +12,13 @@ import requests
 from ingredients import get_ingredient_rating
 from forms import RegistrationForm, LoginForm
 
+
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'Ozusen18'
 uri = os.getenv('DATABASE_URL', 'postgresql:///cocktails')
-if uri.startswith("postgres://"):
+if uri and uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
