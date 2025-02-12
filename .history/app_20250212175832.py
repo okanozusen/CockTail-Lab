@@ -330,64 +330,76 @@ def test_db():
 
 if __name__ == '__main__':
     app.run(debug=True)
-# 🔹 Description:
-# This Flask application serves as the backend for the Cocktail Lab web application,
-# allowing users to register, log in, create and manage cocktails, and interact with the database.
-#
-# 🔹 Features:
-# - User authentication (Registration, Login, Logout)
-# - Password validation with strict security rules
-# - Cocktail creation, deletion, and retrieval
-# - Database connectivity and error handling
-# - API endpoints for testing application health
-#
-# =============================================
-# 🛠️ CONFIGURATION
-# =============================================
-#
-# 1️⃣ **Environment Variables**
-# - `SECRET_KEY`: Used for session security.
-# - `DATABASE_URL`: PostgreSQL database connection URL.
-# - `DEBUG_TB_INTERCEPT_REDIRECTS`: Prevents redirect interception by Flask Debug Toolbar.
-#
-# 2️⃣ **Libraries Used**
-# - `Flask` → Web framework
-# - `Flask-WTF` → Form validation
-# - `Flask-Login` → User authentication
-# - `SQLAlchemy` → ORM for database management
-# - `Werkzeug` → Password hashing
-# - `Requests` → API integration
-# - `Flask-DebugToolbar` → Debugging support
-#
-# =============================================
-# 🔗 ROUTES OVERVIEW
-# =============================================
-#
-# 📌 **1. User Authentication**
-# - `GET /register` → Displays registration form
-# - `POST /register` → Creates a new user (Requires a strong password)
-# - `GET /login` → Displays login form
-# - `POST /login` → Logs in a user (Validates credentials)
-# - `GET /logout` → Logs out the current user
-#
-# 📌 **2. Cocktail Management**
-# - `GET /create_cocktail` → Displays the cocktail creation form
-# - `POST /create_cocktail` → Creates a new cocktail
-# - `GET /cocktail_detail/<int:cocktail_id>` → Shows details of a cocktail
-# - `POST /delete_cocktail/<int:cocktail_id>` → Deletes a cocktail
-#
-# 📌 **3. Testing & Debugging**
-# - `GET /test` → Checks if the Flask server is running
-# - `GET /test-db` → Verifies the database connection
-#
-# =============================================
-# 🔐 PASSWORD VALIDATION
-# =============================================
-# ✅ Password must be at least **10 characters long**
-# ✅ Must contain **one uppercase letter**
-# ✅ Must contain **one lowercase letter**
-# ✅ Must contain **one number**
-# ✅ Must contain **one special character** (@, $, !, %, *, ?, &)
-#
-# Regex Rule: 
-# `r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$"`
+"""
+=============================================
+🍹 COCKTAIL LAB - FLASK BACKEND DOCUMENTATION
+=============================================
+
+🔹 Description:
+This Flask application serves as the backend for the Cocktail Lab web application, allowing users to register, log in, create and manage cocktails, and interact with the database.
+
+🔹 Features:
+- User authentication (Registration, Login, Logout)
+- Password validation with strict security rules
+- Cocktail creation, deletion, and retrieval
+- Database connectivity and error handling
+- API endpoints for testing application health
+
+=============================================
+🛠️ CONFIGURATION
+=============================================
+
+1️⃣ **Environment Variables**
+- `SECRET_KEY`: Used for session security.
+- `DATABASE_URL`: PostgreSQL database connection URL.
+- `DEBUG_TB_INTERCEPT_REDIRECTS`: Prevents redirect interception by Flask Debug Toolbar.
+
+2️⃣ **Libraries Used**
+- `Flask` → Web framework
+- `Flask-WTF` → Form validation
+- `Flask-Login` → User authentication
+- `SQLAlchemy` → ORM for database management
+- `Werkzeug` → Password hashing
+- `Requests` → API integration
+- `Flask-DebugToolbar` → Debugging support
+
+=============================================
+🔗 ROUTES OVERVIEW
+=============================================
+
+📌 **1. User Authentication**
+- `GET /register` → Displays registration form
+- `POST /register` → Creates a new user (Requires a strong password)
+- `GET /login` → Displays login form
+- `POST /login` → Logs in a user (Validates credentials)
+- `GET /logout` → Logs out the current user
+
+📌 **2. Cocktail Management**
+- `GET /create_cocktail` → Displays the cocktail creation form
+- `POST /create_cocktail` → Creates a new cocktail
+- `GET /cocktail_detail/<int:cocktail_id>` → Shows details of a cocktail
+- `POST /delete_cocktail/<int:cocktail_id>` → Deletes a cocktail
+
+📌 **3. Testing & Debugging**
+- `GET /test` → Checks if the Flask server is running
+- `GET /test-db` → Verifies the database connection
+
+=============================================
+🔐 PASSWORD VALIDATION
+=============================================
+✅ Password must be at least **10 characters long**
+✅ Must contain **one uppercase letter**
+✅ Must contain **one lowercase letter**
+✅ Must contain **one number**
+✅ Must contain **one special character** (@, $, !, %, *, ?, &)
+
+Regex Rule: 
+`r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$"`
+
+=============================================
+🚀 SETUP INSTRUCTIONS
+=============================================
+
+1️⃣ Install dependencies:
+   ```sh
+   pip install -r requirements.txt

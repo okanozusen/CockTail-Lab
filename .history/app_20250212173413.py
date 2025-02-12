@@ -6,13 +6,12 @@ from wtforms.validators import DataRequired, Length, EqualTo
 from flask_login import login_user, login_required, logout_user, current_user
 from models import Cocktail, User
 from extensions import db, login_manager, migrate
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 from flask_debugtoolbar import DebugToolbarExtension
 import requests
 from ingredients import get_ingredient_rating
 from forms import RegistrationForm, LoginForm
 from sqlalchemy.sql import text
-import re
 
 PASSWORD_REGEX = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$"
 
@@ -243,59 +242,22 @@ def calculate_ratings(ingredients, ounces):
     return final_ratings
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-    
-    if form.validate_on_submit():
-        existing_user = User.query.filter_by(username=form.username.data).first()
-        if existing_user:
-            flash('❌ Username already exists. Please choose a different one.', 'danger')
-            return redirect(url_for('register'))
 
-        # 🔍 Validate password strength
-        if not re.match(PASSWORD_REGEX, form.password.data):
-            flash('❌ Password must be at least 10 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character.', 'danger')
-            return redirect(url_for('register'))
-
-        # ✅ Hash password before saving
-        hashed_password = generate_password_hash(form.password.data)
-
-        user = User(username=form.username.data, password_hash=hashed_password)
-        db.session.add(user)
-        try:
-            db.session.commit()
-            login_user(user)
-            flash('✅ Welcome, our new apprentice! Ready to start your mixology journey?', 'success')
-            return redirect(url_for('index'))
-        except Exception as e:
-            db.session.rollback()
-            flash('❌ An error occurred while registering. Please try again.', 'danger')
-
-    return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-
-        # ✅ Validate password format before checking credentials
-        if not re.match(PASSWORD_REGEX, form.password.data):
-            flash('❌ Invalid password format. Ensure it meets security requirements.', 'danger')
-            return redirect(url_for('login'))
-
-        # ✅ Check if user exists and password matches
-        if user and check_password_hash(user.password_hash, form.password.data):
+        if user and user.check_password(form.password.data):
             login_user(user)
-            flash('✅ Welcome back, our bartender apprentice! Time to shake things up!', 'success')
+            flash('Welcome back, our bartender apprentice! Time to shake things up!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('❌ Invalid username or password. Please try again.', 'danger')
-
+            flash('Invalid username or password. Please try again.', 'danger')
     return render_template('login.html', form=form)
+
 
 @app.route('/logout')
 def logout():
@@ -330,64 +292,3 @@ def test_db():
 
 if __name__ == '__main__':
     app.run(debug=True)
-# 🔹 Description:
-# This Flask application serves as the backend for the Cocktail Lab web application,
-# allowing users to register, log in, create and manage cocktails, and interact with the database.
-#
-# 🔹 Features:
-# - User authentication (Registration, Login, Logout)
-# - Password validation with strict security rules
-# - Cocktail creation, deletion, and retrieval
-# - Database connectivity and error handling
-# - API endpoints for testing application health
-#
-# =============================================
-# 🛠️ CONFIGURATION
-# =============================================
-#
-# 1️⃣ **Environment Variables**
-# - `SECRET_KEY`: Used for session security.
-# - `DATABASE_URL`: PostgreSQL database connection URL.
-# - `DEBUG_TB_INTERCEPT_REDIRECTS`: Prevents redirect interception by Flask Debug Toolbar.
-#
-# 2️⃣ **Libraries Used**
-# - `Flask` → Web framework
-# - `Flask-WTF` → Form validation
-# - `Flask-Login` → User authentication
-# - `SQLAlchemy` → ORM for database management
-# - `Werkzeug` → Password hashing
-# - `Requests` → API integration
-# - `Flask-DebugToolbar` → Debugging support
-#
-# =============================================
-# 🔗 ROUTES OVERVIEW
-# =============================================
-#
-# 📌 **1. User Authentication**
-# - `GET /register` → Displays registration form
-# - `POST /register` → Creates a new user (Requires a strong password)
-# - `GET /login` → Displays login form
-# - `POST /login` → Logs in a user (Validates credentials)
-# - `GET /logout` → Logs out the current user
-#
-# 📌 **2. Cocktail Management**
-# - `GET /create_cocktail` → Displays the cocktail creation form
-# - `POST /create_cocktail` → Creates a new cocktail
-# - `GET /cocktail_detail/<int:cocktail_id>` → Shows details of a cocktail
-# - `POST /delete_cocktail/<int:cocktail_id>` → Deletes a cocktail
-#
-# 📌 **3. Testing & Debugging**
-# - `GET /test` → Checks if the Flask server is running
-# - `GET /test-db` → Verifies the database connection
-#
-# =============================================
-# 🔐 PASSWORD VALIDATION
-# =============================================
-# ✅ Password must be at least **10 characters long**
-# ✅ Must contain **one uppercase letter**
-# ✅ Must contain **one lowercase letter**
-# ✅ Must contain **one number**
-# ✅ Must contain **one special character** (@, $, !, %, *, ?, &)
-#
-# Regex Rule: 
-# `r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$"`
