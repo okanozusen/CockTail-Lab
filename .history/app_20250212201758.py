@@ -21,8 +21,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev_secret_key')
 uri = os.getenv('DATABASE_URL', 'postgresql://gaming_lab_psql_user:BpVA4tBlRHtP2njTyIxlmLSITAj34dsl@dpg-culvbrqn91rc739o61a0-a.oregon-postgres.render.com/gaming_lab_psql')
-if uri and uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
