@@ -41,7 +41,7 @@ target_db = current_app.extensions['migrate'].db
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
-nano migrations/env.py# my_important_option = config.get_main_option("my_important_option")
+# my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
 
@@ -111,6 +111,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-
-SQLALCHEMY_DATABASE_URI = "postgresql://gaming_lab_psql_user:BpVA4tBlRHtP2njTyIxlmLSITAj34dsl@dpg-culvbrqn91rc739o61a0-a.oregon-postgres.render.com/gaming_lab_psql"
-SQLALCHEMY_TRACK_MODIFICATIONS = False
