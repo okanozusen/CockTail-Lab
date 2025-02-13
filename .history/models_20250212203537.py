@@ -34,7 +34,7 @@ class Cocktail(db.Model):
     freshness = db.Column(db.Float, default=0)
     enjoyment_rating = db.Column(db.Float, default=0)
     final_strength = db.Column(db.Float, default=0)
-    user_id = db.Column(db.Integer, db.ForeignKey('users_cocktail.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(''), nullable=False)
 
     user = db.relationship('User', back_populates='cocktails')
 

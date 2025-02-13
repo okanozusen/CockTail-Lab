@@ -4,7 +4,7 @@ from extensions import db
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users_cocktail'
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(128), unique=True, nullable=False)
@@ -34,7 +34,7 @@ class Cocktail(db.Model):
     freshness = db.Column(db.Float, default=0)
     enjoyment_rating = db.Column(db.Float, default=0)
     final_strength = db.Column(db.Float, default=0)
-    user_id = db.Column(db.Integer, db.ForeignKey('users_cocktail.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = db.relationship('User', back_populates='cocktails')
 
