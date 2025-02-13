@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired, Length, EqualTo
 from flask_login import login_user, login_required, logout_user, current_user
 from models import Cocktail
 from models import UsersCocktail
+
 from extensions import db, login_manager, migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_debugtoolbar import DebugToolbarExtension

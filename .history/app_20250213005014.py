@@ -4,8 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
 from flask_login import login_user, login_required, logout_user, current_user
-from models import Cocktail
-from models import UsersCocktail
+from models import Cocktail, User
 from extensions import db, login_manager, migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_debugtoolbar import DebugToolbarExtension
@@ -38,7 +37,7 @@ migrate.init_app(app, db)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return UsersCocktail.query.get(int(user_id))
+    return User.query.get(int(user_id))
 
 
 @app.route('/')
@@ -243,28 +242,31 @@ def calculate_ratings(ingredients, ounces):
 
     return final_ratings
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        existing_user = UsersCocktail.query.filter_by(username=form.username.data).first()
+        existing_user = User.query.filter_by(username=form.username.data).first()
         if existing_user:
             flash('❌ Username already exists. Please choose a different one.', 'danger')
             return redirect(url_for('register'))
 
+        # Validate password strength
         if not re.match(PASSWORD_REGEX, form.password.data):
             flash('❌ Password must be at least 10 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character.', 'danger')
             return redirect(url_for('register'))
 
-        # ✅ Correctly create user with hashed password
-        new_user = UsersCocktail(username=form.username.data)
-        new_user.set_password(form.password.data)  # 🔥 This was missing before
+        # ✅ Hash password before saving
+        hashed_password = generate_password_hash(form.password.data)
+
+        user = User(username=form.username.data, password_hash=hashed_password)
 
         try:
-            db.session.add(new_user)
+            db.session.add(user)
             db.session.commit()
-            login_user(new_user)
+            login_user(user)
             flash('✅ Welcome, our new apprentice! Ready to start your mixology journey?', 'success')
             return redirect(url_for('index'))
         except Exception as e:
@@ -279,7 +281,7 @@ def login():
     form = LoginForm()
     
     if form.validate_on_submit():
-        user = UsersCocktail.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
 
         # ✅ Validate password format before checking credentials
         if not re.match(PASSWORD_REGEX, form.password.data):

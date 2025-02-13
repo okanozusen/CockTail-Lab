@@ -38,5 +38,6 @@ class Cocktail(db.Model):
 
     user = db.relationship('UsersCocktail', back_populates='cocktails')
 
+
     def __repr__(self):
         return f'<Cocktail {self.name}>'

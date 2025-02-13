@@ -5,7 +5,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
 from flask_login import login_user, login_required, logout_user, current_user
 from models import Cocktail
-from models import UsersCocktail
+from models import User as UsersCocktail
 from extensions import db, login_manager, migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_debugtoolbar import DebugToolbarExtension
@@ -248,18 +248,23 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        existing_user = UsersCocktail.query.filter_by(username=form.username.data).first()
+        # Check if user already exists
+        
         if existing_user:
             flash('❌ Username already exists. Please choose a different one.', 'danger')
             return redirect(url_for('register'))
 
+        # Validate password strength
         if not re.match(PASSWORD_REGEX, form.password.data):
             flash('❌ Password must be at least 10 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character.', 'danger')
             return redirect(url_for('register'))
 
-        # ✅ Correctly create user with hashed password
-        new_user = UsersCocktail(username=form.username.data)
-        new_user.set_password(form.password.data)  # 🔥 This was missing before
+        # ✅ Hash password before saving
+        hashed_password = generate_password_hash(form.password.data)
+
+        # ✅ Create new user and add to database
+        new_user = UsersCocktail(username=form.username.data, password_hash=hashed_password)
+
 
         try:
             db.session.add(new_user)

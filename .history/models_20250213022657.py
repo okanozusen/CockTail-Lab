@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from extensions import db
 
 
-class UsersCocktail(db.Model, UserMixin):
+
     __tablename__ = 'users_cocktail'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -36,7 +36,7 @@ class Cocktail(db.Model):
     final_strength = db.Column(db.Float, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('users_cocktail.id'), nullable=False)
 
-    user = db.relationship('UsersCocktail', back_populates='cocktails')
+    user = db.relationship('User', back_populates='cocktails')
 
     def __repr__(self):
         return f'<Cocktail {self.name}>'

@@ -111,6 +111,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-
-SQLALCHEMY_DATABASE_URI = "postgresql://gaming_lab_psql_user:BpVA4tBlRHtP2njTyIxlmLSITAj34dsl@dpg-culvbrqn91rc739o61a0-a.oregon-postgres.render.com/gaming_lab_psql"
-SQLALCHEMY_TRACK_MODIFICATIONS = False

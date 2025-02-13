@@ -1,0 +1,22 @@
+                                      Table "public.cocktails"
+      Column      |       Type        | Collation | Nullable |                Default                
+------------------+-------------------+-----------+----------+---------------------------------------
+ id               | integer           |           | not null | nextval('cocktails_id_seq'::regclass)
+ name             | character varying |           | not null | 
+ cup              | character varying |           | not null | 
+ capacity         | integer           |           | not null | 
+ ingredients      | json              |           | not null | 
+ color            | character varying |           | not null | 
+ sweetness        | double precision  |           |          | 0
+ bitterness       | double precision  |           |          | 0
+ smoothness       | double precision  |           |          | 0
+ strength         | double precision  |           |          | 0
+ freshness        | double precision  |           |          | 0
+ enjoyment_rating | double precision  |           |          | 0
+ final_strength   | double precision  |           |          | 0
+ user_id          | integer           |           | not null | 
+Indexes:
+    "cocktails_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "cocktails_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users_cocktail(id) ON DELETE CASCADE
+

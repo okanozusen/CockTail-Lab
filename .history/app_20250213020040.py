@@ -5,7 +5,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
 from flask_login import login_user, login_required, logout_user, current_user
 from models import Cocktail
-from models import UsersCocktail
+from models import User as UsersCocktail
 from extensions import db, login_manager, migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_debugtoolbar import DebugToolbarExtension
@@ -59,6 +59,7 @@ def create_cocktail():
             capacity = data.get('capacity')
             ingredients = data.get('ingredients', [])
             color = data.get('color', '#FFFFFF')
+             user_id=current_user.id 
             sweetness = data.get('sweetness', 0)
             bitterness = data.get('bitterness', 0)
             smoothness = data.get('smoothness', 0)
