@@ -20,7 +20,9 @@ PASSWORD_REGEX = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev_secret_key')
-DATABASE_URL = os.getenv("DATABASE_URL")
+uri = os.getenv('DATABASE_URL', 'postgresql:///cocktails')
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
